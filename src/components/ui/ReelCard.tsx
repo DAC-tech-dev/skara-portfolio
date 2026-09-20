@@ -12,8 +12,30 @@ import { cn } from '@/lib/utils';
  */
 export default function ReelCard({ reel, index = 0 }: { reel: Reel; index?: number }) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const isTargetReel = reel.blurb.includes('Sam Deep, Nia Pearl');
   const [playing, setPlaying] = useState(false);
   const [muted, setMuted] = useState(true);
+
+  useEffect(() => {
+    if (isTargetReel && videoRef.current) {
+      const v = videoRef.current;
+      v.volume = 0.2;
+      v.muted = false;
+      setMuted(false);
+      
+      const playPromise = v.play();
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => setPlaying(true))
+          .catch(() => {
+            // Autoplay with sound blocked by browser, fallback to muted
+            v.muted = true;
+            setMuted(true);
+            void v.play().then(() => setPlaying(true)).catch(() => {});
+          });
+      }
+    }
+  }, [isTargetReel]);
 
   const toggle = () => {
     const v = videoRef.current;
@@ -53,7 +75,7 @@ export default function ReelCard({ reel, index = 0 }: { reel: Reel; index?: numb
           muted={muted}
           loop
           playsInline
-          preload="none"
+          preload={isTargetReel ? "auto" : "none"}
           aria-label={`${reel.title} — DJ Skara mix reel`}
           className="h-full w-full object-cover"
           onPlay={() => setPlaying(true)}
