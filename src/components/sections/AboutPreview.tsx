@@ -8,7 +8,7 @@ import { site } from '@/lib/site';
 export default function AboutPreview() {
   return (
     <section className="relative bg-ink-950 py-24 lg:py-32">
-      <div className="mx-auto grid max-w-7xl items-center gap-14 px-6 lg:grid-cols-2 lg:gap-20 lg:px-10">
+      <div className="mx-auto grid max-w-7xl items-start gap-6 px-6 grid-cols-[120px_1fr] sm:grid-cols-[200px_1fr] md:gap-14 lg:grid-cols-2 lg:items-center lg:gap-20 lg:px-10">
         {/* Portrait */}
         <AnimatedContent direction="horizontal" distance={70} reverse duration={0.9}>
           <GlareHover
