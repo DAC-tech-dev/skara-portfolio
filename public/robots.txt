@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+# AdSense crawler needs access to render pages for ad targeting
+User-agent: Mediapartners-Google
+Allow: /
+
+User-agent: AdsBot-Google
+Allow: /
+
+Sitemap: https://djskara.co.za/sitemap.xml
