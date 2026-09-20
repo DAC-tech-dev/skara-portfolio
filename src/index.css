@@ -1,0 +1,274 @@
+@import 'tailwindcss';
+
+/* ------------------------------------------------------------------
+   DJ SKARA PROMOTIONS — design tokens
+   Palette pulled from the client's key art: black stage, chrome type,
+   gold foil accents, warm amber spill from the rig.
+------------------------------------------------------------------ */
+@theme {
+  /* Base */
+  --color-ink-950: #050507;
+  --color-ink-900: #08080b;
+  --color-ink-850: #0d0d11;
+  --color-ink-800: #131318;
+  --color-ink-700: #1c1c22;
+  --color-ink-600: #2a2a33;
+
+  /* Gold foil */
+  --color-gold-50: #fdf6e3;
+  --color-gold-200: #f7e3ae;
+  --color-gold-400: #e3b34c;
+  --color-gold-500: #d4a03a;
+  --color-gold-600: #c8952f;
+  --color-gold-700: #9a7020;
+
+  /* Chrome / silver */
+  --color-chrome-100: #f2f2f5;
+  --color-chrome-300: #d3d3da;
+  --color-chrome-500: #9a9aa6;
+  --color-chrome-700: #6a6a76;
+
+  /* Text */
+  --color-bone: #f4f4f6;
+  --color-muted: #8c8c99;
+
+  /* Type */
+  --font-display: 'Anton', 'Arial Narrow', sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-script: 'Caveat', cursive;
+
+  /* Motion */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  * {
+    border-color: var(--color-ink-700);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    background-color: var(--color-ink-950);
+    color: var(--color-bone);
+    font-family: var(--font-body);
+    font-feature-settings: 'ss01', 'cv01';
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: var(--color-gold-400);
+    color: var(--color-ink-950);
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-ink-900);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-ink-600);
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-gold-700);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-gold-400);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+}
+
+@layer components {
+  /* Oversized editorial display type — the hero device from the brief */
+  .display-xl {
+    font-family: var(--font-display);
+    font-weight: 400;
+    line-height: 0.82;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+  }
+
+  /*
+    Brushed-chrome fill, mirrors the logo lockup on the poster.
+
+    GSAP SplitText gives every character its own transformed, will-change layer,
+    which breaks `background-clip: text` inherited from an ancestor — the glyphs
+    render transparent with nothing behind them. So the gradient is re-declared
+    on the split children too. The fill is vertical and every char shares a
+    baseline, so a per-character gradient is visually identical to one spanning
+    the whole line.
+  */
+  .text-chrome,
+  .text-chrome .split-char,
+  .text-chrome .split-word,
+  .text-chrome .word {
+    /* Bottom stop stays above #7a7a88 — any darker and the lower third of each
+       glyph disappears into the near-black page. */
+    background: linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #dcdce2 20%,
+      #7e7e90 46%,
+      #f2f2f5 57%,
+      #c2c2cc 78%,
+      #8a8a98 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .text-gold-foil,
+  .text-gold-foil .split-char,
+  .text-gold-foil .split-word,
+  .text-gold-foil .word {
+    background: linear-gradient(180deg, #f7e3ae 0%, #e3b34c 40%, #9a7020 72%, #e3b34c 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /*
+    Once SplitText has run, the characters carry the fill themselves. Leaving it
+    on the wrapper too paints a second, slightly offset copy of the text that
+    shows as a smeared ghost on the first glyph of each line.
+  */
+  .text-chrome:has(.split-char),
+  .text-gold-foil:has(.split-char) {
+    background: none;
+  }
+
+  .hairline {
+    border-top: 1px solid color-mix(in oklab, var(--color-chrome-700) 35%, transparent);
+  }
+
+  /* Small-caps eyebrow label used across sections */
+  .eyebrow {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: var(--color-gold-400);
+  }
+
+  .surface-card {
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0) 100%),
+      var(--color-ink-850);
+    border: 1px solid color-mix(in oklab, var(--color-chrome-700) 28%, transparent);
+  }
+
+  /* Vertical 9:16 frame for the client's phone-shot reels */
+  .reel-frame {
+    aspect-ratio: 9 / 16;
+    background: var(--color-ink-900);
+  }
+
+  .noise-overlay::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}
+
+@layer utilities {
+  .mask-fade-b {
+    -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
+  }
+
+  /*
+    Dissolves the crop's hard rectangle into the dark stage, and kills the
+    greyscale side-figures bleeding in at the poster's edges. The radii stay
+    under 50% so the fade finishes inside the element — anything larger pushes
+    the transparent stop off the box and leaves visible straight edges.
+  */
+  .mask-vignette {
+    /* Single layer on purpose: -webkit-mask-composite and mask-composite take
+       different value sets, and mixing them leaves one layer unmasked, which is
+       what puts a hard rectangle back around the crop. Radii stay under 50% so
+       the transparent stop lands inside the box on every edge. */
+    --vignette: radial-gradient(
+      ellipse 47% 50% at 50% 40%,
+      #000 30%,
+      rgba(0, 0, 0, 0.82) 56%,
+      rgba(0, 0, 0, 0.3) 78%,
+      transparent 95%
+    );
+    -webkit-mask-image: var(--vignette);
+    mask-image: var(--vignette);
+  }
+
+  .animate-marquee {
+    animation: marquee 28s linear infinite;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes star-movement-bottom {
+  0% {
+    transform: translate(0%, 0%);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-100%, 0%);
+    opacity: 0;
+  }
+}
+
+@keyframes star-movement-top {
+  0% {
+    transform: translate(0%, 0%);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(100%, 0%);
+    opacity: 0;
+  }
+}
+
+.animate-star-movement-bottom {
+  animation: star-movement-bottom linear infinite alternate;
+}
+
+.animate-star-movement-top {
+  animation: star-movement-top linear infinite alternate;
+}
+
+/* Respect reduced-motion: freeze decorative loops, keep content readable */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
