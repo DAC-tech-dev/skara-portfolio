@@ -1,15 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import { cn } from '@/lib/utils';
-import { hasAdConsent } from './consent';
-
-declare global {
-  interface Window {
-    adsbygoogle?: unknown[];
-  }
-}
-
-const CLIENT = import.meta.env.VITE_ADSENSE_CLIENT as string | undefined;
+import { ADSENSE_CLIENT } from './client';
 
 type AdSlotProps = {
   /** Ad unit ID from the AdSense dashboard (data-ad-slot). */
@@ -29,6 +21,9 @@ type AdSlotProps = {
  *     route + slot so React mounts a genuinely fresh node on navigation.
  *  2. StrictMode double-invokes effects in dev, which would double-push. A ref
  *     guard makes the push idempotent per mounted element.
+ *
+ * Units are requested regardless of cookie consent; consent decides whether the
+ * ad is personalised, which AdSenseScript signals on the queue.
  */
 export default function AdSlot({
   slot,
@@ -42,7 +37,6 @@ export default function AdSlot({
   const pushed = useRef(false);
 
   useEffect(() => {
-    if (!CLIENT || !hasAdConsent()) return;
     if (pushed.current) return;
 
     const el = insRef.current;
@@ -58,10 +52,6 @@ export default function AdSlot({
     }
   }, [pathname, slot]);
 
-  // Without a publisher ID configured there is nothing to render. Returning null
-  // keeps the layout honest rather than reserving space for an ad that cannot load.
-  if (!CLIENT) return null;
-
   return (
     <aside
       className={cn('mx-auto w-full max-w-5xl px-6 py-10', className)}
@@ -76,7 +66,7 @@ export default function AdSlot({
         ref={insRef}
         className="adsbygoogle block"
         style={{ display: 'block', minHeight: 90 }}
-        data-ad-client={CLIENT}
+        data-ad-client={ADSENSE_CLIENT}
         data-ad-slot={slot}
         data-ad-format={format}
         data-full-width-responsive="true"

@@ -1,5 +1,4 @@
 # Google AdSense authorised seller declaration.
-# Replace pub-0000000000000000 with the publisher ID from your AdSense account
-# (AdSense > Account > Settings). This file must be reachable at
-# https://yourdomain.com/ads.txt or AdSense will flag the site.
-google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0
+# Must stay reachable at https://<yourdomain>/ads.txt or AdSense will flag the
+# site as having an unauthorised-inventory risk.
+google.com, pub-8487777891911418, DIRECT, f08c47fec0942fa0

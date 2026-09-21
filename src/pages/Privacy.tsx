@@ -43,7 +43,10 @@ export default function Privacy() {
         <ul>
           <li>To respond to booking enquiries and provide quotes.</li>
           <li>To operate, secure and improve the website.</li>
-          <li>To display advertising, where you have consented to advertising cookies.</li>
+          <li>
+            To display advertising. Where you have consented to advertising cookies, those
+            ads may be personalised; otherwise they are non-personalised.
+          </li>
         </ul>
         <p>
           We do not sell your personal information, and we do not share enquiry details with
@@ -53,11 +56,16 @@ export default function Privacy() {
         <h2>Cookies and advertising</h2>
         <p>
           We use a small number of cookies to keep the site working and to remember your
-          cookie choice. With your consent we also allow Google, as a third-party vendor, to
-          serve advertising on this site.
+          cookie choice. We also allow Google, as a third-party vendor, to serve advertising
+          on this site. Your consent choice controls whether those ads are personalised —
+          if you decline, Google is asked to serve non-personalised ads, which still use
+          cookies for frequency capping, reporting and fraud prevention.
         </p>
         <ul>
-          <li>Google uses cookies to serve ads based on your prior visits to this and other websites.</li>
+          <li>
+            With consent, Google uses cookies to serve ads based on your prior visits to this
+            and other websites.
+          </li>
           <li>
             You can opt out of personalised advertising at any time through{' '}
             <a
@@ -90,9 +98,9 @@ export default function Privacy() {
           </li>
         </ul>
         <p>
-          You can decline advertising cookies using the banner shown on your first visit, or
-          clear them at any time through your browser settings. Declining does not affect your
-          ability to use the site or submit an enquiry.
+          You can decline personalised advertising using the banner shown on your first visit,
+          or clear cookies at any time through your browser settings. Declining does not affect
+          your ability to use the site or submit an enquiry.
         </p>
 
         <h2>Service providers</h2>

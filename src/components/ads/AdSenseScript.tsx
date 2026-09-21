@@ -1,12 +1,20 @@
 import { useEffect, useState } from 'react';
 import { hasAdConsent } from './consent';
-
-const CLIENT = import.meta.env.VITE_ADSENSE_CLIENT as string | undefined;
-const SRC = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
+import type { AdsByGoogleQueue } from './client';
 
 /**
- * Injects the AdSense loader once, and only after the visitor has accepted
- * advertising cookies. Loading it up front would set cookies pre-consent.
+ * Applies the visitor's advertising-cookie choice to AdSense.
+ *
+ * The loader itself is a static tag in index.html — it has to be, or the
+ * AdSense verification crawler (which does not run the app) never sees it.
+ * So consent is expressed here instead of by withholding the script:
+ * until the visitor accepts, ads are requested non-personalised.
+ *
+ * `requestNonPersonalizedAds` is read off the queue when a unit is filled, so
+ * setting it before AdSlot pushes is what makes it take effect.
+ *
+ * Note: for EEA/UK traffic Google requires a certified CMP; this flag alone is
+ * not sufficient there. See README.
  */
 export default function AdSenseScript() {
   const [consented, setConsented] = useState(hasAdConsent);
@@ -18,14 +26,8 @@ export default function AdSenseScript() {
   }, []);
 
   useEffect(() => {
-    if (!CLIENT || !consented) return;
-    if (document.querySelector(`script[src^="${SRC}"]`)) return;
-
-    const s = document.createElement('script');
-    s.src = `${SRC}?client=${CLIENT}`;
-    s.async = true;
-    s.crossOrigin = 'anonymous';
-    document.head.appendChild(s);
+    const queue: AdsByGoogleQueue = (window.adsbygoogle = window.adsbygoogle || []);
+    queue.requestNonPersonalizedAds = consented ? 0 : 1;
   }, [consented]);
 
   return null;

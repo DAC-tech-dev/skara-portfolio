@@ -26,9 +26,17 @@
     <link rel="preload" as="image" href="/media/skara-portrait.jpg" fetchpriority="high" />
 
     <!--
-      The AdSense loader is injected at runtime by src/components/ads/AdSenseScript.tsx
-      once the visitor accepts advertising cookies. Do not hard-code it here.
+      Google AdSense loader. It must be static in the document head: the AdSense
+      verification crawler fetches this HTML without running the app, so a
+      runtime-injected tag would not be found and the site would fail review.
+      Consent is handled by gating personalisation, not the script itself —
+      see src/components/ads/AdSenseScript.tsx.
     -->
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8487777891911418"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
     <div id="root"></div>

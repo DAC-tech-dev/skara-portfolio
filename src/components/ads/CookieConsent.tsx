@@ -27,8 +27,9 @@ export default function CookieConsent() {
     >
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-sm leading-relaxed text-chrome-300">
-          We use cookies to keep the site running and, with your permission, to show
-          advertising from Google. See our{' '}
+          We use cookies to keep the site running and to show advertising from Google. With
+          your permission those ads are personalised; decline and you will still see ads, just
+          not tailored ones. See our{' '}
           <Link to="/privacy" className="text-gold-400 underline underline-offset-4">
             privacy policy
           </Link>
