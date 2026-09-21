@@ -14,7 +14,7 @@ export const site = {
   url: 'https://djskara.co.za',
   description:
     'DJ Skara Promotions — amapiano, afro house and party sets for weddings, clubs and corporate events across Mpumalanga and Gauteng. Book South Africa\'s hardest-working selector.',
-  email: 'Kgolwazi@gmail.com',
+  email: 'karaboskara994@gmail.com',
   regions: ['Mpumalanga', 'Gauteng'],
   locale: 'en-ZA',
   builtBy: {
