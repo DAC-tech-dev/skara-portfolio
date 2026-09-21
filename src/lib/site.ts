@@ -14,12 +14,12 @@ export const site = {
   url: 'https://djskara.co.za',
   description:
     'DJ Skara Promotions — amapiano, afro house and party sets for weddings, clubs and corporate events across Mpumalanga and Gauteng. Book South Africa\'s hardest-working selector.',
-  email: 'karaboskara994@gmail.com',
+  email: 'Kgolwazi@gmail.com',
   regions: ['Mpumalanga', 'Gauteng'],
   locale: 'en-ZA',
   builtBy: {
     name: 'DAC Technologies (Pty) Ltd',
-    url: 'https://dactechnologies.co.za',
+    url: 'https://dac-technologies.co.za',
   },
 } as const;
 
