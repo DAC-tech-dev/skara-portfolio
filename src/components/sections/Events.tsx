@@ -4,10 +4,15 @@ import SectionHeading from '@/components/ui/SectionHeading';
 import AnimatedContent from '@/components/reactbits/AnimatedContent';
 import { events, site } from '@/lib/site';
 
+// Event dates are calendar dates ('2026-10-11'), which JS parses as UTC
+// midnight. Formatting in UTC shows them as written for every visitor — in the
+// visitor's own zone anyone west of UTC sees the day before, and the
+// prerendered page (built in UTC) would disagree with the browser.
 const fmt = new Intl.DateTimeFormat('en-ZA', {
   day: '2-digit',
   month: 'short',
   year: 'numeric',
+  timeZone: 'UTC',
 });
 
 export default function Events({ showPast = false }: { showPast?: boolean }) {

@@ -33,12 +33,17 @@ export const nav = [
 ] as const;
 
 // TODO(client): replace the '#' placeholders with real profile URLs.
-export const socials = [
+// A profile still set to '#' is left off the site entirely — links that go
+// nowhere read as an unfinished site to AdSense's reviewers — and shows up
+// everywhere automatically once its URL is filled in.
+const socialProfiles = [
   { label: 'TikTok', href: '#', handle: '@djskara' },
   { label: 'Instagram', href: '#', handle: '@djskara' },
   { label: 'YouTube', href: '#', handle: 'DJ Skara Promotions' },
   { label: 'Spotify', href: '#', handle: 'DJ Skara' },
 ] as const;
+
+export const socials = socialProfiles.filter((s) => s.href !== '#');
 
 export const marqueeWords = [
   'MUSIC',

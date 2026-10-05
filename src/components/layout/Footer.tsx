@@ -59,21 +59,25 @@ export default function Footer() {
               </li>
             </ul>
 
-            <h2 className="eyebrow mt-8">Follow</h2>
-            <ul className="mt-4 flex flex-wrap gap-2">
-              {socials.map((s) => (
-                <li key={s.label}>
-                  <a
-                    href={s.href}
-                    target="_blank"
-                    rel="noopener noreferrer me"
-                    className="inline-block rounded-full border border-ink-600 px-3.5 py-1.5 text-[10px] font-semibold tracking-[0.18em] text-chrome-500 uppercase transition hover:border-gold-600 hover:text-gold-400"
-                  >
-                    {s.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
+            {socials.length > 0 && (
+              <>
+                <h2 className="eyebrow mt-8">Follow</h2>
+                <ul className="mt-4 flex flex-wrap gap-2">
+                  {socials.map((s) => (
+                    <li key={s.label}>
+                      <a
+                        href={s.href}
+                        target="_blank"
+                        rel="noopener noreferrer me"
+                        className="inline-block rounded-full border border-ink-600 px-3.5 py-1.5 text-[10px] font-semibold tracking-[0.18em] text-chrome-500 uppercase transition hover:border-gold-600 hover:text-gold-400"
+                      >
+                        {s.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
           </div>
         </div>
 

@@ -2,6 +2,7 @@ import Seo from '@/components/Seo';
 import PageHeader from '@/components/ui/PageHeader';
 import BookingCTA from '@/components/sections/BookingCTA';
 import AdSlot from '@/components/ads/AdSlot';
+import { AD_SLOTS } from '@/components/ads/client';
 import AnimatedContent from '@/components/reactbits/AnimatedContent';
 import TiltedCard from '@/components/reactbits/TiltedCard';
 import { gallery } from '@/lib/site';
@@ -54,7 +55,7 @@ export default function Gallery() {
         </div>
       </section>
 
-      <AdSlot slot="5555555555" />
+      <AdSlot slot={AD_SLOTS.gallery} />
       <BookingCTA />
     </>
   );

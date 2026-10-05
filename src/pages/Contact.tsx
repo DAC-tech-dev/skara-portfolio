@@ -3,6 +3,7 @@ import { Mail, MapPin, Send, Check, AlertCircle } from 'lucide-react';
 import Seo from '@/components/Seo';
 import PageHeader from '@/components/ui/PageHeader';
 import AdSlot from '@/components/ads/AdSlot';
+import { AD_SLOTS } from '@/components/ads/client';
 import AnimatedContent from '@/components/reactbits/AnimatedContent';
 import Magnet from '@/components/reactbits/Magnet';
 import { site, socials } from '@/lib/site';
@@ -231,22 +232,26 @@ export default function Contact() {
                 {site.regions.join(' & ')}, South Africa
               </p>
 
-              <h2 className="eyebrow mt-8">Follow</h2>
-              <ul className="mt-4 space-y-2.5">
-                {socials.map((s) => (
-                  <li key={s.label}>
-                    <a
-                      href={s.href}
-                      target="_blank"
-                      rel="noopener noreferrer me"
-                      className="flex items-center justify-between text-sm text-chrome-500 transition-colors hover:text-gold-400"
-                    >
-                      <span>{s.label}</span>
-                      <span className="text-xs text-chrome-700">{s.handle}</span>
-                    </a>
-                  </li>
-                ))}
-              </ul>
+              {socials.length > 0 && (
+                <>
+                  <h2 className="eyebrow mt-8">Follow</h2>
+                  <ul className="mt-4 space-y-2.5">
+                    {socials.map((s) => (
+                      <li key={s.label}>
+                        <a
+                          href={s.href}
+                          target="_blank"
+                          rel="noopener noreferrer me"
+                          className="flex items-center justify-between text-sm text-chrome-500 transition-colors hover:text-gold-400"
+                        >
+                          <span>{s.label}</span>
+                          <span className="text-xs text-chrome-700">{s.handle}</span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              )}
 
               <p className="font-script mt-8 text-3xl leading-none text-gold-400">
                 {site.script}
@@ -256,7 +261,7 @@ export default function Contact() {
         </div>
       </section>
 
-      <AdSlot slot="6666666666" />
+      <AdSlot slot={AD_SLOTS.contact} />
     </>
   );
 }

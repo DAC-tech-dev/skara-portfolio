@@ -37,7 +37,7 @@ export default function AdSlot({
   const pushed = useRef(false);
 
   useEffect(() => {
-    if (pushed.current) return;
+    if (!slot || pushed.current) return;
 
     const el = insRef.current;
     // AdSense marks a filled unit with this attribute; never push to it twice.
@@ -51,6 +51,10 @@ export default function AdSlot({
       // the reserved space simply stays empty.
     }
   }, [pathname, slot]);
+
+  // No unit configured for this placement yet (see AD_SLOTS) — render nothing
+  // rather than an empty labelled box.
+  if (!slot) return null;
 
   return (
     <aside

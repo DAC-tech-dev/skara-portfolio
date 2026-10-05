@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, type ComponentType } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Layout from '@/components/layout/Layout';
 import Home from '@/pages/Home';
@@ -22,78 +22,40 @@ function RouteFallback() {
   );
 }
 
+function lazyRoute(Page: ComponentType) {
+  return (
+    <Suspense fallback={<RouteFallback />}>
+      <Page />
+    </Suspense>
+  );
+}
+
+/**
+ * The route tree without a router around it, so the browser can mount it in a
+ * BrowserRouter and the build can render it in a StaticRouter.
+ */
+export function AppRoutes() {
+  return (
+    <Routes>
+      <Route element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route path="about" element={lazyRoute(About)} />
+        <Route path="mixes" element={lazyRoute(Mixes)} />
+        <Route path="events" element={lazyRoute(EventsPage)} />
+        <Route path="gallery" element={lazyRoute(Gallery)} />
+        <Route path="contact" element={lazyRoute(Contact)} />
+        <Route path="privacy" element={lazyRoute(Privacy)} />
+        <Route path="terms" element={lazyRoute(Terms)} />
+        <Route path="*" element={lazyRoute(NotFound)} />
+      </Route>
+    </Routes>
+  );
+}
+
 export default function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route
-            path="about"
-            element={
-              <Suspense fallback={<RouteFallback />}>
-                <About />
-              </Suspense>
-            }
-          />
-          <Route
-            path="mixes"
-            element={
-              <Suspense fallback={<RouteFallback />}>
-                <Mixes />
-              </Suspense>
-            }
-          />
-          <Route
-            path="events"
-            element={
-              <Suspense fallback={<RouteFallback />}>
-                <EventsPage />
-              </Suspense>
-            }
-          />
-          <Route
-            path="gallery"
-            element={
-              <Suspense fallback={<RouteFallback />}>
-                <Gallery />
-              </Suspense>
-            }
-          />
-          <Route
-            path="contact"
-            element={
-              <Suspense fallback={<RouteFallback />}>
-                <Contact />
-              </Suspense>
-            }
-          />
-          <Route
-            path="privacy"
-            element={
-              <Suspense fallback={<RouteFallback />}>
-                <Privacy />
-              </Suspense>
-            }
-          />
-          <Route
-            path="terms"
-            element={
-              <Suspense fallback={<RouteFallback />}>
-                <Terms />
-              </Suspense>
-            }
-          />
-          <Route
-            path="*"
-            element={
-              <Suspense fallback={<RouteFallback />}>
-                <NotFound />
-              </Suspense>
-            }
-          />
-        </Route>
-      </Routes>
+      <AppRoutes />
     </BrowserRouter>
   );
 }

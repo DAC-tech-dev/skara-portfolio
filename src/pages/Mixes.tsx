@@ -4,6 +4,7 @@ import ReelCard from '@/components/ui/ReelCard';
 import Ticker from '@/components/sections/Ticker';
 import BookingCTA from '@/components/sections/BookingCTA';
 import AdSlot from '@/components/ads/AdSlot';
+import { AD_SLOTS } from '@/components/ads/client';
 import AnimatedContent from '@/components/reactbits/AnimatedContent';
 import { reels, socials } from '@/lib/site';
 
@@ -51,27 +52,31 @@ export default function Mixes() {
             ))}
           </div>
 
-          <p className="mt-12 text-sm text-chrome-700">
-            More sets drop weekly on{' '}
-            {socials.map((s, i) => (
-              <span key={s.label}>
-                <a
-                  href={s.href}
-                  target="_blank"
-                  rel="noopener noreferrer me"
-                  className="text-gold-400 underline underline-offset-4 transition-colors hover:text-gold-200"
-                >
-                  {s.label}
-                </a>
-                {i < socials.length - 2 ? ', ' : i === socials.length - 2 ? ' and ' : '.'}
-              </span>
-            ))}
-          </p>
+          {socials.length > 0 && (
+            <>
+              <p className="mt-12 text-sm text-chrome-700">
+                More sets drop weekly on{' '}
+                {socials.map((s, i) => (
+                  <span key={s.label}>
+                    <a
+                      href={s.href}
+                      target="_blank"
+                      rel="noopener noreferrer me"
+                      className="text-gold-400 underline underline-offset-4 transition-colors hover:text-gold-200"
+                    >
+                      {s.label}
+                    </a>
+                    {i < socials.length - 2 ? ', ' : i === socials.length - 2 ? ' and ' : '.'}
+                  </span>
+                ))}
+              </p>
+            </>
+          )}
         </div>
       </section>
 
       <Ticker />
-      <AdSlot slot="3333333333" />
+      <AdSlot slot={AD_SLOTS.mixes} />
 
       {/* Genre notes give the page real text content — AdSense reviews
           thin, media-only pages harshly. */}

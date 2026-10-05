@@ -9,6 +9,7 @@ import Events from '@/components/sections/Events';
 import Testimonials from '@/components/sections/Testimonials';
 import BookingCTA from '@/components/sections/BookingCTA';
 import AdSlot from '@/components/ads/AdSlot';
+import { AD_SLOTS } from '@/components/ads/client';
 import { site } from '@/lib/site';
 
 /** Rich structured data helps both search and AdSense understand the site. */
@@ -43,7 +44,7 @@ export default function Home() {
 
       {/* In-content placement: sits between two substantial sections, never
           above the fold, per AdSense placement policy. */}
-      <AdSlot slot="1111111111" />
+      <AdSlot slot={AD_SLOTS.home} />
 
       <Reels limit={2} />
       <Events />

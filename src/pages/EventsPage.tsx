@@ -4,6 +4,7 @@ import Events from '@/components/sections/Events';
 import Testimonials from '@/components/sections/Testimonials';
 import BookingCTA from '@/components/sections/BookingCTA';
 import AdSlot from '@/components/ads/AdSlot';
+import { AD_SLOTS } from '@/components/ads/client';
 import AnimatedContent from '@/components/reactbits/AnimatedContent';
 import SpotlightCard from '@/components/reactbits/SpotlightCard';
 
@@ -59,7 +60,7 @@ export default function EventsPage() {
       />
 
       <Events showPast />
-      <AdSlot slot="4444444444" />
+      <AdSlot slot={AD_SLOTS.events} />
 
       <section className="border-t border-ink-700 bg-ink-900 py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">

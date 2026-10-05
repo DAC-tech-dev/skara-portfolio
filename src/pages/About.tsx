@@ -4,6 +4,7 @@ import Stats from '@/components/sections/Stats';
 import Services from '@/components/sections/Services';
 import BookingCTA from '@/components/sections/BookingCTA';
 import AdSlot from '@/components/ads/AdSlot';
+import { AD_SLOTS } from '@/components/ads/client';
 import AnimatedContent from '@/components/reactbits/AnimatedContent';
 import GlareHover from '@/components/reactbits/GlareHover';
 import { site } from '@/lib/site';
@@ -122,7 +123,7 @@ export default function About() {
       </section>
 
       <Stats />
-      <AdSlot slot="2222222222" />
+      <AdSlot slot={AD_SLOTS.about} />
       <Services />
       <BookingCTA />
     </>
